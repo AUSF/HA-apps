@@ -1,5 +1,5 @@
 name: "IO2MQTT"
-version: "1.0"
+version: "0.1"
 slug: "io2mqtt"
 image: "ghcr.io/AUSF/{arch}-addon-io2mqtt"
 description: "Esecuzione dell'ultima versione Docker ufficiale di MQTT-IO"

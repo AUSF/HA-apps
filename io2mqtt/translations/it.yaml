@@ -1,0 +1,7 @@
+configuration:
+  mqtt_io_config_path:
+    name: Percorso file di configurazione MQTT-IO
+    description: Percorso completo del file YAML di configurazione di MQTT-IO (deve trovarsi in una cartella mappata, es. /config/...).
+  log_level:
+    name: Livello di log
+    description: Verbosità del log di MQTT-IO.

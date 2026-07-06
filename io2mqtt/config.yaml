@@ -1,0 +1,23 @@
+name: "IO2MQTT"
+version: "1.0"
+slug: "io2mqtt"
+image: "ghcr.io/AUSF/{arch}-addon-io2mqtt"
+description: "Esecuzione dell'ultima versione Docker ufficiale di MQTT-IO"
+arch:
+  - aarch64
+  - amd64
+  - armv7
+startup: "services"
+boot: "auto"
+full_access: true
+apparmor: false
+gpio: true
+uart: true
+map:
+  - config:rw
+options:
+  mqtt_io_config_path: "/config/mqtt-io/config.yml"
+  log_level: "info"
+schema:
+  mqtt_io_config_path: "str"
+  log_level: "list(debug|info|warning|error)"

@@ -3,8 +3,6 @@
 A local Home Assistant add-on wrapping [MQTT-IO](https://github.com/flyte/mqtt-io)
 for GPIO/serial access on Raspberry Pi (3B+, 4, 5).
 
-See [DOCS.md](io2mqtt/DOCS.md) for full user documentation.
-
 ## Repository structure
 
 ```text

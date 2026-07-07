@@ -1,13 +1,49 @@
 # IO2MQTT
 
-Add-on Home Assistant locale che incapsula [MQTT-IO](https://github.com/flyte/mqtt-io)
-per l'accesso a GPIO/seriale su Raspberry Pi (3B+, 4, 5).
+A local Home Assistant add-on wrapping [MQTT-IO](https://github.com/flyte/mqtt-io)
+for GPIO/serial access on Raspberry Pi (3B+, 4, 5).
 
-Vedi [DOCS.md](DOCS.md) per la documentazione utente completa.
+See [DOCS.md](io2mqtt/DOCS.md) for full user documentation.
 
-## Sviluppo
+## Repository structure
 
-- `Dockerfile`: build basata su `flyte/mqtt-io:latest` (Debian buster), con
-  compilazione di `liblgpio` dal sorgente per supporto RPi5.
-- `run.sh`: legge le opzioni dell'add-on da `/data/options.json`, genera una
-  copia effettiva del config MQTT-IO con il log level richiesto.
+```text
+.
+├── repository.yaml
+├── .github/
+│   └── workflows/
+│       └── build.yml          # multi-arch build & publish to GHCR
+└── io2mqtt/
+    ├── config.yaml
+    ├── Dockerfile
+    ├── run.sh                 # reads add-on options, launches MQTT-IO
+    ├── serial_term.py         # custom stream module (terminator + timeout)
+    ├── icon.png
+    ├── logo.png
+    ├── DOCS.md
+    └── translations/
+```
+
+## Installation
+
+In Home Assistant: **Settings → Add-ons → Store → ⋮ → Repositories**, add
+this repository's URL. The IO2MQTT add-on will then appear in the store.
+
+Images are pre-built for `aarch64`, `armv7`, and `amd64` and published to
+GHCR — no compilation happens on the target device.
+
+## Development notes
+
+- **Base image**: `flyte/mqtt-io:latest` (Debian buster). `pigpio` is
+  intentionally not used, since it does not support the Raspberry Pi 5;
+  `lgpio` is compiled from source at build time (`joan2937/lg`), along with
+  an updated `linux/gpio.h` kernel header (buster's is too old for the GPIO
+  v2 chardev API that `lg` requires).
+- **`run.sh`**: reads `/data/options.json` (via `jq`), generates an
+  effective copy of the user's MQTT-IO config with the requested log level
+  injected, and launches MQTT-IO against that copy — the user's original
+  file is never modified in place.
+- **Releasing**: push a tag matching `v*.*.*` (e.g. `v0.4.0`) to trigger the
+  build workflow. After the first push of a new image, remember to set the
+  GHCR package visibility to **public**, or Supervisor's anonymous pull will
+  fail.

@@ -26,6 +26,7 @@ RUN sed -i \
 ENV GPIOZERO_PIN_FACTORY=lgpio
 
 COPY run.sh /run.sh
+COPY serial_term.py /home/mqtt_io/mqtt_io/modules/stream/serial_term.py
 RUN sed -i 's/\r$//' /run.sh && chmod a+x /run.sh
 
 ENTRYPOINT ["/run.sh"]

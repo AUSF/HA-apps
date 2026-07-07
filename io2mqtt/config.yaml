@@ -1,8 +1,8 @@
 name: "IO2MQTT"
-version: "0.1.0"
+version: "0.2.0"
 slug: "io2mqtt"
 image: "ghcr.io/ausf/{arch}-addon-io2mqtt"
-description: "Esecuzione dell'ultima versione Docker ufficiale di MQTT-IO"
+description: "Run the last official version of MQTT-IO, adding a custom serial stream module."
 arch:
   - aarch64
   - amd64

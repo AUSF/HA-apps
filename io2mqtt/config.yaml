@@ -18,7 +18,7 @@ map:
   - config:rw
 options:
   mqtt_io_config_path: "/config/mqtt-io/config.yml"
-  log_level: "info"
+  log_level: "warning"
 schema:
   mqtt_io_config_path: "str"
   log_level: "list(debug|info|warning|error)"

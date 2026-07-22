@@ -1,5 +1,5 @@
 name: "IO2MQTT"
-version: "0.2.0"
+version: "0.2.3"
 slug: "io2mqtt"
 image: "ghcr.io/ausf/{arch}-addon-io2mqtt"
 description: "Run the last official version of MQTT-IO, adding a custom serial stream module"

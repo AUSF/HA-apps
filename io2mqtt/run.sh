@@ -15,11 +15,6 @@ if [ ! -f "$CONFIG_PATH" ]; then
     exit 1
 fi
 
-# Installa a runtime i binding Python GPIO (liblgpio è già compilata in fase di build)
-/home/mqtt_io/venv/bin/python -m pip install --no-cache-dir lgpio gpiozero pyserial
-
-# Genera una copia "effettiva" del file di configurazione con il livello di log
-# richiesto dall'utente, senza modificare il file originale su disco
 EFFECTIVE_CONFIG="/tmp/mqtt-io-effective-config.yml"
 
 /home/mqtt_io/venv/bin/python - "$CONFIG_PATH" "$EFFECTIVE_CONFIG" "$LOG_LEVEL" <<'PYEOF'
@@ -51,5 +46,4 @@ with open(dst_path, "w") as f:
     yaml.safe_dump(config, f, sort_keys=False)
 PYEOF
 
-sleep 2
 exec /home/mqtt_io/venv/bin/python -m mqtt_io "$EFFECTIVE_CONFIG"

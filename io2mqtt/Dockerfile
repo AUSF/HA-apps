@@ -16,6 +16,7 @@ RUN sed -i \
     && make \
     && make install \
     && ldconfig \
+    && cd / \
     && rm -rf /tmp/lg-master \
     && /home/mqtt_io/venv/bin/python -m pip install --no-cache-dir lgpio gpiozero pyserial
 
